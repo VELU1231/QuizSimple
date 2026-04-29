@@ -6,6 +6,7 @@ from app.services.quiz_service import (
     get_leaderboard,
     save_score,
 )
+from app.services.supabase_service import supabase_enabled
 
 api_bp = Blueprint("api", __name__)
 
@@ -49,3 +50,13 @@ def submit():
 def leaderboard():
     quiz_id = request.args.get("quiz_id")
     return jsonify(get_leaderboard(quiz_id))
+
+
+@api_bp.route("/health")
+def health():
+    return jsonify(
+        {
+            "status": "ok",
+            "storage": "supabase" if supabase_enabled() else "memory-fallback",
+        }
+    )

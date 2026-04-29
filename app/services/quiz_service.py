@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 
+from app.services.supabase_service import fetch_top_scores, save_score_row, supabase_enabled
+
 _DATA_FILE = Path(__file__).parent.parent / "data" / "quizzes.json"
 _quizzes: list | None = None
 _leaderboard: dict[str, list] = {}
@@ -88,6 +90,20 @@ def calculate_score(quiz: dict, answers: dict) -> dict:
 
 
 def get_leaderboard(quiz_id: str | None = None) -> list:
+    if supabase_enabled():
+        rows = fetch_top_scores(quiz_id, limit=10)
+        if rows:
+            return [
+                {
+                    "name": r.get("name", "Anonymous"),
+                    "score": r.get("score", 0),
+                    "max_score": r.get("max_score", 0),
+                    "quiz_id": r.get("quiz_id"),
+                    "created_at": r.get("created_at"),
+                }
+                for r in rows
+            ]
+
     if quiz_id:
         entries = _leaderboard.get(quiz_id, [])
         return sorted(entries, key=lambda x: x["score"], reverse=True)[:10]
@@ -98,6 +114,16 @@ def get_leaderboard(quiz_id: str | None = None) -> list:
 
 
 def save_score(quiz_id: str, name: str, score: int, max_score: int) -> None:
+    payload = {
+        "quiz_id": quiz_id,
+        "name": (name or "Anonymous")[:64],
+        "score": int(score),
+        "max_score": int(max_score),
+    }
+
+    if save_score_row(payload):
+        return
+
     _leaderboard.setdefault(quiz_id, []).append(
         {"name": name, "score": score, "max_score": max_score}
     )
