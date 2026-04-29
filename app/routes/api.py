@@ -1,9 +1,11 @@
 from flask import Blueprint, jsonify, request
+from app.services.auth_service import require_auth
 from app.services.quiz_service import (
-    get_all_quizzes,
-    get_quiz,
     calculate_score,
+    clear_leaderboard,
+    get_all_quizzes,
     get_leaderboard,
+    get_quiz,
     save_score,
 )
 from app.services.supabase_service import supabase_enabled
@@ -50,6 +52,22 @@ def submit():
 def leaderboard():
     quiz_id = request.args.get("quiz_id")
     return jsonify(get_leaderboard(quiz_id))
+
+
+@api_bp.route("/admin/leaderboard", methods=["GET"])
+@require_auth
+def admin_leaderboard():
+    quiz_id = request.args.get("quiz_id")
+    return jsonify(get_leaderboard(quiz_id))
+
+
+@api_bp.route("/admin/leaderboard", methods=["DELETE"])
+@require_auth
+def admin_clear_leaderboard():
+    payload = request.get_json(silent=True) or {}
+    quiz_id = payload.get("quiz_id")
+    deleted = clear_leaderboard(quiz_id)
+    return jsonify({"deleted": deleted, "quiz_id": quiz_id})
 
 
 @api_bp.route("/health")

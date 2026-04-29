@@ -1,7 +1,12 @@
 import json
 from pathlib import Path
 
-from app.services.supabase_service import fetch_top_scores, save_score_row, supabase_enabled
+from app.services.supabase_service import (
+    delete_scores,
+    fetch_top_scores,
+    save_score_row,
+    supabase_enabled,
+)
 
 _DATA_FILE = Path(__file__).parent.parent / "data" / "quizzes.json"
 _quizzes: list | None = None
@@ -127,3 +132,19 @@ def save_score(quiz_id: str, name: str, score: int, max_score: int) -> None:
     _leaderboard.setdefault(quiz_id, []).append(
         {"name": name, "score": score, "max_score": max_score}
     )
+
+
+def clear_leaderboard(quiz_id: str | None = None) -> int:
+    if supabase_enabled():
+        deleted = delete_scores(quiz_id)
+        if deleted > 0:
+            return deleted
+
+    if quiz_id:
+        removed = len(_leaderboard.get(quiz_id, []))
+        _leaderboard[quiz_id] = []
+        return removed
+
+    removed = sum(len(entries) for entries in _leaderboard.values())
+    _leaderboard.clear()
+    return removed

@@ -67,7 +67,7 @@ def fetch_top_scores(quiz_id: str | None = None, limit: int = 10) -> list[dict[s
         return []
 
     params = {
-        "select": "quiz_id,name,score,max_score,created_at",
+        "select": "id,quiz_id,name,score,max_score,created_at",
         "order": "score.desc,created_at.asc",
         "limit": str(limit),
     }
@@ -85,3 +85,35 @@ def fetch_top_scores(quiz_id: str | None = None, limit: int = 10) -> list[dict[s
     except Exception as exc:  # pragma: no cover - network/database runtime guard
         logger.warning("Supabase select failed, using fallback leaderboard: %s", exc)
         return []
+
+
+def delete_scores(quiz_id: str | None = None) -> int:
+    base = _base_rest_url()
+    headers = _headers()
+    if base is None or headers is None:
+        return 0
+
+    params = {
+        "select": "id",
+    }
+    if quiz_id:
+        params["quiz_id"] = f"eq.{quiz_id}"
+    else:
+        params["id"] = "gt.0"
+
+    try:
+        endpoint = urljoin(base, SCORES_TABLE)
+        res = requests.delete(
+            endpoint,
+            params=params,
+            headers={**headers, "Prefer": "return=representation"},
+            timeout=8,
+        )
+        if 200 <= res.status_code < 300:
+            data = res.json() if res.text else []
+            return len(data) if isinstance(data, list) else 0
+        logger.warning("Supabase delete failed (%s): %s", res.status_code, res.text)
+        return 0
+    except Exception as exc:
+        logger.warning("Supabase delete failed: %s", exc)
+        return 0

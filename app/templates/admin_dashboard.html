@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard — QuizApp{% endblock %}
+
+{% block nav_extra %}
+<a href="/" class="nav-link">Home</a>
+<form method="post" action="{{ url_for('auth.logout_action') }}" style="display:inline;">
+  <button type="submit" class="nav-link" style="background:none;border:none;padding:0;">Logout</button>
+</form>
+{% endblock %}
+
+{% block content %}
+<section class="admin-wrap">
+  <div class="admin-header">
+    <h1>Admin Dashboard</h1>
+    <p>Signed in as <strong>{{ user.username }}</strong></p>
+  </div>
+
+  <div class="admin-controls">
+    <form method="get" action="{{ url_for('main.admin_panel') }}">
+      <select name="quiz_id">
+        <option value="">All quizzes</option>
+        {% for q in quizzes %}
+          <option value="{{ q.id }}" {% if selected_quiz == q.id %}selected{% endif %}>{{ q.title }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="btn btn-ghost">Filter</button>
+    </form>
+
+    <button id="clear-leaderboard-btn" class="btn btn-primary">Clear Leaderboard</button>
+  </div>
+
+  <div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Quiz</th>
+          <th>Score</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in rows %}
+          <tr>
+            <td>{{ r.name }}</td>
+            <td>{{ r.quiz_id or selected_quiz or '-' }}</td>
+            <td>{{ r.score }}/{{ r.max_score }}</td>
+            <td>{{ r.created_at or '-' }}</td>
+          </tr>
+        {% else %}
+          <tr>
+            <td colspan="4">No rows found.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.getElementById('clear-leaderboard-btn')?.addEventListener('click', async () => {
+    if (!confirm('Clear leaderboard for current filter?')) return;
+    const quizId = {{ selected_quiz | tojson }};
+    const res = await fetch('/api/admin/leaderboard', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ quiz_id: quizId || null }),
+    });
+    if (!res.ok) {
+      alert('Failed to clear leaderboard');
+      return;
+    }
+    window.location.reload();
+  });
+</script>
+{% endblock %}

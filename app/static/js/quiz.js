@@ -9,6 +9,7 @@
     answers:     {},                      // { "0": optIdx, "1": optIdx, … }
     startTime:   null,
     submitted:   false,
+    nextArmedAt: 0,
   };
 
   // ── DOM References ────────────────────────────────────────
@@ -102,6 +103,7 @@
   // ── Select answer ─────────────────────────────────────────
   function selectAnswer(optIdx) {
     state.answers[String(state.currentIdx)] = optIdx;
+    state.nextArmedAt = Date.now() + 220; // avoid accidental immediate next on double-tap
     renderQuestion();   // re-render highlights selection and enables Next
   }
 
@@ -114,6 +116,7 @@
   }
 
   function goNext() {
+    if (Date.now() < state.nextArmedAt) return;
     const total = quiz.questions.length;
     if (state.currentIdx < total - 1) {
       state.currentIdx += 1;

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Login — QuizApp{% endblock %}
+
+{% block nav_extra %}
+<a href="/" class="nav-link">← Home</a>
+{% endblock %}
+
+{% block content %}
+<section class="auth-wrap">
+  <div class="auth-card">
+    <h1>Admin Login</h1>
+    <p class="auth-sub">Sign in to manage leaderboard and quiz operations.</p>
+
+    {% if error %}
+      <p class="auth-error">{{ error }}</p>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('auth.login_action') }}" class="auth-form">
+      <input type="hidden" name="next" value="{{ next_url }}" />
+
+      <label for="username">Username</label>
+      <input id="username" name="username" required autocomplete="username" />
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" required autocomplete="current-password" />
+
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

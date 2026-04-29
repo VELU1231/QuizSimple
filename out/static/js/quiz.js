@@ -26,6 +26,7 @@
     answers:    {},     // { "0": optIdx, … }
     startTime:  null,
     submitted:  false,
+    nextArmedAt: 0,
   };
 
   // ── DOM refs ─────────────────────────────────────────────────────────────
@@ -164,6 +165,7 @@
   // ── Select answer (Quizller: instant highlight feedback) ───────────────
   function selectAnswer(optIdx) {
     state.answers[String(state.currentIdx)] = optIdx;
+    state.nextArmedAt = Date.now() + 220; // prevent accidental immediate next
     renderQuestion();
   }
 
@@ -173,6 +175,7 @@
   }
 
   function goNext() {
+    if (Date.now() < state.nextArmedAt) return;
     const total = quiz.questions.length;
     if (state.currentIdx < total - 1) {
       state.currentIdx += 1;
