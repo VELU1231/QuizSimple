@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}{{ quiz.title }} — QuizApp{% endblock %}
+{% block description %}{{ quiz.description }}{% endblock %}
+
+{% block nav_extra %}
+<a href="/" class="nav-link">&#8592; All Quizzes</a>
+{% endblock %}
+
+{% block content %}
+<div class="quiz-page">
+
+  <!-- ===================== START SCREEN ===================== -->
+  <div class="screen" id="start-screen">
+    <div class="start-card">
+      <div class="start-icon">{{ quiz.icon }}</div>
+      <span class="start-category">{{ quiz.category }}</span>
+      <h1 class="start-title">{{ quiz.title }}</h1>
+      <p class="start-desc">{{ quiz.description }}</p>
+
+      <div class="start-meta">
+        <div class="meta-chip">
+          <span class="meta-chip-icon">&#10067;</span>
+          <span>{{ quiz.questions | length }} Questions</span>
+        </div>
+        <div class="meta-chip diff-{{ quiz.difficulty | lower }}">
+          <span class="meta-chip-icon">&#9651;</span>
+          <span>{{ quiz.difficulty }}</span>
+        </div>
+        <div class="meta-chip">
+          <span class="meta-chip-icon">&#11088;</span>
+          <span>{{ quiz.questions | sum(attribute='points') }} pts max</span>
+        </div>
+      </div>
+
+      <div class="start-name-row">
+        <label for="player-name" class="name-label">Your Name (optional)</label>
+        <input
+          type="text"
+          id="player-name"
+          class="name-input"
+          placeholder="Anonymous"
+          maxlength="32"
+          autocomplete="off"
+        />
+      </div>
+
+      <button id="start-btn" class="btn btn-primary btn-xl">
+        Start Quiz &#8594;
+      </button>
+
+      <p class="start-tip">Tip: You can go back and change answers before submitting.</p>
+    </div>
+  </div>
+
+  <!-- ===================== QUIZ SCREEN ===================== -->
+  <div class="screen" id="quiz-screen">
+    <!-- Progress bar -->
+    <div class="progress-wrap">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-bar"></div>
+      </div>
+      <div class="progress-info">
+        <span id="question-counter" class="prog-counter">1 / 10</span>
+        <span id="answered-count" class="prog-answered">0 answered</span>
+      </div>
+    </div>
+
+    <!-- Question card -->
+    <div class="question-card">
+      <div class="question-header">
+        <span class="question-label">Question</span>
+        <span class="points-badge" id="points-badge">2 pts</span>
+      </div>
+      <p class="question-text" id="question-text">Loading...</p>
+
+      <ul class="options-list" id="options-list">
+        <!-- Rendered by quiz.js -->
+      </ul>
+    </div>
+
+    <!-- Navigation -->
+    <div class="quiz-nav">
+      <button id="btn-prev" class="btn btn-ghost" disabled>&#8592; Previous</button>
+      <button id="btn-next" class="btn btn-primary" disabled>Next &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ===================== LOADING SCREEN ===================== -->
+  <div class="screen" id="loading-screen">
+    <div class="loading-wrap">
+      <div class="spinner"></div>
+      <p class="loading-text">Calculating your score&hellip;</p>
+    </div>
+  </div>
+
+  <!-- ===================== RESULTS SCREEN ===================== -->
+  <div class="screen" id="results-screen">
+    <div class="results-wrap">
+
+      <!-- Score ring -->
+      <div class="score-ring-wrap">
+        <svg class="score-ring" viewBox="0 0 120 120" width="160" height="160">
+          <circle class="ring-track" cx="60" cy="60" r="54" />
+          <circle class="ring-fill" id="score-ring-progress" cx="60" cy="60" r="54" />
+        </svg>
+        <div class="ring-label">
+          <span class="ring-score" id="result-score">0</span>
+          <span class="ring-divider">/</span>
+          <span class="ring-max" id="result-max">0</span>
+        </div>
+      </div>
+
+      <div class="result-tier" id="result-tier">Novice</div>
+      <div class="result-pct" id="result-pct">0%</div>
+      <p class="result-msg" id="result-msg"></p>
+
+      <!-- CTA buttons -->
+      <div class="result-actions">
+        <button id="restart-btn" class="btn btn-primary">Try Again</button>
+        <button id="home-btn" class="btn btn-ghost">All Quizzes</button>
+      </div>
+
+      <!-- Review -->
+      <div class="review-section">
+        <h3 class="review-heading">Question Review</h3>
+        <div class="review-list" id="review-list">
+          <!-- Populated by quiz.js -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- end .quiz-page -->
+{% endblock %}
+
+{% block scripts %}
+<script>
+  window.QUIZ_DATA = {{ quiz | tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+{% endblock %}

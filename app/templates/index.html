@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}QuizApp — Test Your Knowledge{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-badge">Interactive Quiz Platform</div>
+  <h1 class="hero-title">
+    How Much Do<br />
+    <span class="gradient-text">You Know?</span>
+  </h1>
+  <p class="hero-subtitle">
+    Challenge yourself with curated quizzes across knowledge, science, and pop culture.
+    Navigate freely, track your score, and see where you rank.
+  </p>
+  <a href="#quizzes" class="btn btn-primary btn-lg">Explore Quizzes</a>
+</section>
+
+<!-- Quiz Grid -->
+<section class="quiz-section" id="quizzes">
+  <div class="section-header">
+    <h2 class="section-title">Pick a Quiz</h2>
+    <p class="section-sub">Choose a category and start testing your knowledge</p>
+  </div>
+  <div class="quiz-grid" id="quiz-grid">
+    <!-- Populated by home.js -->
+    <noscript>
+      {% for q in quizzes %}
+      <a href="/quiz/{{ q.id }}" class="quiz-card">
+        <div class="card-icon">{{ q.icon }}</div>
+        <div class="card-content">
+          <span class="card-category">{{ q.category }}</span>
+          <h3 class="card-title">{{ q.title }}</h3>
+          <p class="card-desc">{{ q.description }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </noscript>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="how-section" id="how-it-works">
+  <div class="section-header">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-sub">Three simple steps to quiz glory</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-number">01</div>
+      <div class="step-icon">&#127381;</div>
+      <h3 class="step-title">Choose a Quiz</h3>
+      <p class="step-desc">Pick from General Knowledge, Science, or Pop Culture — more categories coming soon.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">02</div>
+      <div class="step-icon">&#9998;</div>
+      <h3 class="step-title">Answer Questions</h3>
+      <p class="step-desc">Navigate freely with Previous and Next. Change your answers anytime before submitting.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">03</div>
+      <div class="step-icon">&#127942;</div>
+      <h3 class="step-title">See Your Results</h3>
+      <p class="step-desc">Get your score, performance tier, and a full question-by-question review.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  window.ALL_QUIZZES = {{ quizzes | tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/home.js') }}"></script>
+{% endblock %}

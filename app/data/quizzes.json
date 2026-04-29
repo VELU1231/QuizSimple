@@ -1,0 +1,235 @@
+[
+  {
+    "id": "trivia",
+    "title": "General Knowledge",
+    "description": "Test your knowledge across history, geography, science, and everyday facts.",
+    "category": "Knowledge",
+    "icon": "🌍",
+    "difficulty": "Medium",
+    "time_limit": 0,
+    "questions": [
+      {
+        "question": "What is the capital city of Australia?",
+        "options": ["Sydney", "Melbourne", "Canberra", "Brisbane"],
+        "answer": 2,
+        "points": 2
+      },
+      {
+        "question": "How many sides does a hexagon have?",
+        "options": ["5", "6", "7", "8"],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "Who wrote the play 'Romeo and Juliet'?",
+        "options": ["Charles Dickens", "William Shakespeare", "Jane Austen", "Leo Tolstoy"],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "What is the largest ocean on Earth?",
+        "options": ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+        "answer": 3,
+        "points": 2
+      },
+      {
+        "question": "In which year did World War II end?",
+        "options": ["1943", "1944", "1945", "1946"],
+        "answer": 2,
+        "points": 2
+      },
+      {
+        "question": "What is the smallest planet in our solar system?",
+        "options": ["Venus", "Mercury", "Mars", "Pluto"],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "How many bones are in the adult human body?",
+        "options": ["185", "196", "206", "214"],
+        "answer": 2,
+        "points": 3
+      },
+      {
+        "question": "What is the chemical symbol for gold?",
+        "options": ["Go", "Ag", "Au", "Fe"],
+        "answer": 2,
+        "points": 2
+      },
+      {
+        "question": "Which country is credited with inventing the printing press?",
+        "options": ["China", "Italy", "Germany", "France"],
+        "answer": 2,
+        "points": 3
+      },
+      {
+        "question": "Approximately how fast does light travel per second?",
+        "options": ["199,792 km/s", "299,792 km/s", "399,792 km/s", "499,792 km/s"],
+        "answer": 1,
+        "points": 3
+      }
+    ]
+  },
+  {
+    "id": "science",
+    "title": "Science & Technology",
+    "description": "Dive into computing, biology, physics, and the wonders of the natural world.",
+    "category": "Science",
+    "icon": "🔬",
+    "difficulty": "Hard",
+    "time_limit": 0,
+    "questions": [
+      {
+        "question": "What does CPU stand for?",
+        "options": [
+          "Central Processing Unit",
+          "Computer Processing Unit",
+          "Central Program Utility",
+          "Core Processor Unit"
+        ],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "Which planet is known as the Red Planet?",
+        "options": ["Venus", "Jupiter", "Mars", "Saturn"],
+        "answer": 2,
+        "points": 1
+      },
+      {
+        "question": "What is commonly called the 'powerhouse of the cell'?",
+        "options": ["Nucleus", "Ribosome", "Mitochondria", "Golgi apparatus"],
+        "answer": 2,
+        "points": 2
+      },
+      {
+        "question": "What is the most abundant gas in Earth's atmosphere?",
+        "options": ["Oxygen", "Carbon Dioxide", "Argon", "Nitrogen"],
+        "answer": 3,
+        "points": 2
+      },
+      {
+        "question": "Who is credited with inventing the telephone?",
+        "options": [
+          "Thomas Edison",
+          "Nikola Tesla",
+          "Alexander Graham Bell",
+          "James Watt"
+        ],
+        "answer": 2,
+        "points": 2
+      },
+      {
+        "question": "What is the atomic number of carbon?",
+        "options": ["4", "5", "6", "8"],
+        "answer": 2,
+        "points": 3
+      },
+      {
+        "question": "What type of electromagnetic wave is used in Wi-Fi?",
+        "options": ["X-rays", "Radio waves", "Infrared", "Ultraviolet"],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "What does DNA stand for?",
+        "options": [
+          "Deoxyribonucleic Acid",
+          "Dinitrogen Oxalate Acid",
+          "Dual Nucleic Arrangement",
+          "Dynamic Nuclear Acid"
+        ],
+        "answer": 0,
+        "points": 2
+      },
+      {
+        "question": "What is the hardest natural substance on Earth?",
+        "options": ["Quartz", "Diamond", "Titanium", "Graphite"],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "Which programming language was created by Guido van Rossum?",
+        "options": ["Java", "Perl", "Ruby", "Python"],
+        "answer": 3,
+        "points": 2
+      }
+    ]
+  },
+  {
+    "id": "pop-culture",
+    "title": "Pop Culture",
+    "description": "Movies, music, TV, and iconic moments from pop culture history.",
+    "category": "Entertainment",
+    "icon": "🎬",
+    "difficulty": "Easy",
+    "time_limit": 0,
+    "questions": [
+      {
+        "question": "Which film won the very first Academy Award for Best Picture?",
+        "options": ["Casablanca", "Gone with the Wind", "Wings", "Ben-Hur"],
+        "answer": 2,
+        "points": 3
+      },
+      {
+        "question": "Who performed the iconic song 'Thriller'?",
+        "options": ["Michael Jackson", "Prince", "Elvis Presley", "Madonna"],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "Which TV show is set in the fictional kingdom of Westeros?",
+        "options": ["The Witcher", "Game of Thrones", "House of the Dragon", "The Crown"],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "What is the highest-grossing film of all time (unadjusted for inflation)?",
+        "options": ["Avengers: Endgame", "Titanic", "The Lion King", "Avatar"],
+        "answer": 3,
+        "points": 3
+      },
+      {
+        "question": "Which actor plays Tony Stark / Iron Man in the MCU?",
+        "options": [
+          "Chris Evans",
+          "Robert Downey Jr.",
+          "Chris Hemsworth",
+          "Mark Ruffalo"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "In what year did Apple release the first iPhone?",
+        "options": ["2005", "2006", "2007", "2008"],
+        "answer": 2,
+        "points": 2
+      },
+      {
+        "question": "Which band recorded the song 'Bohemian Rhapsody'?",
+        "options": ["The Beatles", "Led Zeppelin", "Queen", "Pink Floyd"],
+        "answer": 2,
+        "points": 1
+      },
+      {
+        "question": "What color is the famous front door of 10 Downing Street in London?",
+        "options": ["Red", "Blue", "Black", "Green"],
+        "answer": 2,
+        "points": 2
+      },
+      {
+        "question": "Which streaming service produced 'Stranger Things'?",
+        "options": ["Amazon Prime Video", "HBO Max", "Disney+", "Netflix"],
+        "answer": 3,
+        "points": 1
+      },
+      {
+        "question": "In what fictional city does Batman protect the citizens?",
+        "options": ["Metropolis", "Star City", "Gotham City", "Central City"],
+        "answer": 2,
+        "points": 2
+      }
+    ]
+  }
+]
