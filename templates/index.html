@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuizSimple – Test Your Knowledge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-content">
+      <div class="logo">🎯 QuizSimple</div>
+      <h1 class="hero-title">Challenge Your Brain.<br/>Beat Your Friends.</h1>
+      <p class="hero-sub">Pick a quiz below and see how you stack up!</p>
+    </div>
+    <div class="hero-waves">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,60 C300,120 900,0 1200,60 L1200,120 L0,120 Z" fill="#f0f2ff"/>
+      </svg>
+    </div>
+  </header>
+
+  <!-- Quiz Cards -->
+  <main class="container">
+    {% if error %}
+    <div class="error-banner">⚠️ {{ error }}</div>
+    {% endif %}
+
+    <h2 class="section-title">Choose Your Quiz</h2>
+    <div class="quiz-grid">
+      {% for quiz in quizzes %}
+      <a href="/quiz/{{ quiz.id }}" class="quiz-card" style="--card-color: {{ quiz.color }}">
+        <div class="quiz-card-icon">{{ quiz.icon }}</div>
+        <div class="quiz-card-body">
+          <h3 class="quiz-card-title">{{ quiz.title }}</h3>
+          <p class="quiz-card-sub">{{ quiz.subtitle }}</p>
+          <div class="quiz-card-meta">
+            <span class="meta-tag">{{ quiz.question_count }} questions</span>
+            {% if quiz.timed %}<span class="meta-tag timed">⏱ Timed</span>{% endif %}
+            {% if quiz.type == 'personality' %}<span class="meta-tag personality">🔮 Personality</span>{% endif %}
+          </div>
+        </div>
+        <div class="quiz-card-arrow">→</div>
+      </a>
+      {% endfor %}
+    </div>
+
+    <!-- How it works -->
+    <section class="how-it-works">
+      <h2 class="section-title">How It Works</h2>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Pick a Quiz</h3>
+          <p>Choose from trivia, personality, or speed rounds.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Answer Questions</h3>
+          <p>Read carefully and tap your answer. Some quizzes are timed!</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>See Your Result</h3>
+          <p>Get your score, personality type, or rank — then share!</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Made with ❤️ &amp; Python · <strong>QuizSimple</strong> © 2024</p>
+  </footer>
+</body>
+</html>
