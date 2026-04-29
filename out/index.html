@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="QuizSimple — Test your knowledge with beautifully crafted quizzes.">
+  <title>QuizSimple — Test Your Knowledge</title>
+  <link rel="stylesheet" href="static/css/style.css">
+  <script src="static/js/theme.js"></script>
+</head>
+<body>
+
+  <!-- ── Navbar ── -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="QuizSimple home">
+        <div class="logo-icon" aria-hidden="true">Q</div>
+        <span class="logo-text">QuizSimple</span>
+      </a>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ── Hero ── -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container">
+        <div class="hero-badge">
+          <span class="badge-dot" aria-hidden="true"></span>
+          Free &amp; Open Source
+        </div>
+        <h1 id="hero-heading">
+          Challenge Your Mind<br>
+          <span class="gradient-text">Prove Your Knowledge</span>
+        </h1>
+        <p>Pick a quiz, answer at your own pace, and see how you rank — no account needed.</p>
+      </div>
+    </section>
+
+    <!-- ── Quiz Grid ── -->
+    <section class="quiz-section" aria-labelledby="quizzes-heading">
+      <div class="container">
+        <h2 class="section-title" id="quizzes-heading">Available Quizzes</h2>
+        <div class="quiz-grid" id="quiz-grid" role="list">
+          <noscript>
+            <p style="color:var(--text-muted);text-align:center;grid-column:1/-1;">
+              Please enable JavaScript to view the quizzes.
+            </p>
+          </noscript>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── How it works ── -->
+    <section class="how-section" aria-labelledby="how-heading">
+      <div class="container">
+        <h2 class="section-title" id="how-heading">How It Works</h2>
+        <div class="steps-grid">
+          <div class="step-card fade-up">
+            <div class="step-num" aria-hidden="true">1</div>
+            <h3>Pick a Quiz</h3>
+            <p>Choose from Knowledge, Science, or Pop Culture — more coming soon.</p>
+          </div>
+          <div class="step-card fade-up" style="animation-delay:.1s">
+            <div class="step-num" aria-hidden="true">2</div>
+            <h3>Answer Questions</h3>
+            <p>Navigate freely — go back to change your mind before finishing.</p>
+          </div>
+          <div class="step-card fade-up" style="animation-delay:.2s">
+            <div class="step-num" aria-hidden="true">3</div>
+            <h3>See Your Score</h3>
+            <p>Get instant results with tier ranking and a full question review.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 QuizSimple. Built with ♥ and JavaScript.</p>
+    </div>
+  </footer>
+
+  <script src="static/js/data.js"></script>
+  <script src="static/js/home.js"></script>
+</body>
+</html>
